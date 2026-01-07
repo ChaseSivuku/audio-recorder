@@ -1,7 +1,8 @@
-export interface RecordingMetadata {
+export interface RecordingMeta{
     id: string;
     uri: string;
     name: string;
     date: string;
-    duration: number;
+    durationMillis: number;
 }
+
