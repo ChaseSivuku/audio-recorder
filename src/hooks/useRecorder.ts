@@ -30,4 +30,21 @@ export const useRecorder = () => {
             Alert.alert('Error', 'could not start recording')
         }
     }
+
+    //stop the recording
+    const stopRecording = async (): Promise<{uri: string, duration: number } | null => {
+        
+        if(!recording) return null;
+
+        try{
+            //stop the recording
+            await recording.stopAndUnloadAsync()
+            
+            const uri = recording.getURI()
+
+            const {sound, status} = await recording.createNewLoadedSoundAsync()
+            
+
+        }
+    }
 }
