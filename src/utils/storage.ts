@@ -3,6 +3,7 @@ import { RecordingMeta } from '../types/recording';
 
 const STORAGE_KEY = 'VOICE_NOTES_DB';
 
+//get recordings
 export const loadRecordings = async (): Promise<RecordingMeta []> => {
     try {
         const data = await AsyncStorage.getItem(STORAGE_KEY);
@@ -15,6 +16,7 @@ export const loadRecordings = async (): Promise<RecordingMeta []> => {
     }
 }
 
+//save recordings
 export const saveRecordings = async (recordings: RecordingMeta[]) => {
     try{
         await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(recordings))
