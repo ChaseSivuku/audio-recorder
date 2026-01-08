@@ -17,7 +17,7 @@ export const useRecorder = () => {
                 if(!resp.granted) return
             }
 
-            //recording modes - sort off
+            //recording modes - sort off - toStudy!
             await Audio.setAudioModeAsync({allowsRecordingIOS: true, playsInSilentModeIOS: true})
             //start recording
             const {recording: newRecording} = await Audio.Recording.createAsync(
@@ -32,7 +32,7 @@ export const useRecorder = () => {
     }
 
     //stop the recording
-    const stopRecording = async (): Promise<{uri: string, duration: number } | null => {
+    const stopRecording = async (): Promise<{uri: string, duration: number } | null> => {
         
         if(!recording) return null;
 
@@ -43,8 +43,22 @@ export const useRecorder = () => {
             const uri = recording.getURI()
 
             const {sound, status} = await recording.createNewLoadedSoundAsync()
+            const duration = ( status as any).durationMillis || 0
             
+            await sound.unloadAsync()
+
+            setRecording(null)
+
+            if(uri){
+                return {uri, duration}
+            }
 
         }
+        catch(error){
+            console.error("could not stop recording", error)
+        }
+        return null
     }
+
+    return {recording, startRecording, stopRecording}
 }
