@@ -46,7 +46,7 @@ export const RecordingItem: React.FC<Props> = ({
         </TouchableOpacity>
 
         {/* delete */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onDelete} style={styles.iconBtn}>
           <MaterialIcons
             name="delete"
             size={20}
